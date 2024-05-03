@@ -13,21 +13,35 @@ code {
 }
 
 .wrapper {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    padding: 15px 30px;
 }
 
-.food {
-  height: 100px;
-  width: 100px;
-  margin: 0 0 10px 0;
-  background-color: pink;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.product_ {
+
+  &_list {
+    margin: 0 auto;
+    display: flex;
+    gap: 40px 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &_title {
+    height: 100px;
+    width: 100%;
+    margin: 0 0 20px 0;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .buttons {
