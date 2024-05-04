@@ -8,7 +8,8 @@ const App = () => {
     <div className='wrapper'>
       <ProductsList>
         <Product product={productsList[0]}/>
-        <Product product={productsList[0]}/>
+        <Product product={productsList[1]}/>
+        <Product product={productsList[2]}/>
       </ProductsList>
     </div>
    )

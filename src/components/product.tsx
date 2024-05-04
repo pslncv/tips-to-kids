@@ -11,12 +11,16 @@ const Product = ({product}: ProductProps) => {
         <div className='product__item'>
             <div className='product__container'>
                 <img src={product.image} alt={product.name} className='product__image'/>
+                <div className='product__rating'>
+                    <div>❤️</div>
+                    <div>{product.rating}</div>
+                </div>
             </div>
             <span className='product__title'>
                 {product.name}
             </span>
             <span className='product__price'>
-                $12
+                ${product.value}
             </span>
             <div className="buttons">
                 <button onClick={() => {              

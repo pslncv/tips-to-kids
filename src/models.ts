@@ -3,6 +3,7 @@ export interface IProduct {
     name: string;
     ingredients: string[];
     instructions: string[];
+    value: number;
     prepTimeMinutes: number;
     cookTimeMinutes: number;
     servings: number;
