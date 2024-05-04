@@ -1,16 +1,21 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
+import { IProduct } from '../models';
 
-const Product = (props: any) => {
+interface ProductProps {
+    product: IProduct
+}
+
+const Product = (props: ProductProps) => {
     console.log(props);
     
     const [counter, setCounter] = useState(0)
     return (
         <div className='product__item'>
             <div className='product__container'>
-                <img src={props.product[0].image} alt={props.product[0].name} className='product__image'/>
+                <img src={props.product.image} alt={props.product.name} className='product__image'/>
             </div>
             <span className='product__title'>
-                {props.product[0].name}
+                {props.product.name}
             </span>
             <span className='product__price'>
                 $12

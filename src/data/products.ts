@@ -1,6 +1,6 @@
-import React from 'react';
+import { IProduct } from "../models";
 
-export const recipes = [
+export const productsList: IProduct[] = [
     {
         "id": 1,
         "name": "Classic Margherita Pizza",
