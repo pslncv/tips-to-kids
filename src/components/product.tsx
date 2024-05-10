@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { IProduct } from '../models';
 
 interface ProductProps {
@@ -20,7 +20,7 @@ const Product = ({product}: ProductProps) => {
                 {product.name}
             </span>
             <span className='product__price'>
-                ${product.value}
+                ${product.prepTimeMinutes}
             </span>
             <div className="buttons">
                 <button onClick={() => {              
