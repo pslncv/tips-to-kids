@@ -8,18 +8,30 @@ const App = () => {
 
   const [recipes, setRecipes] = useState<IProduct[]>([]);
 
-  const getProducts = async () => {
+
+  async function getFood() {
     try {
-      const response = await fetch('https://dummyjson.com/recipe');
+
+      // Response (англ. "ответ") - буквально ответ сервера
+      // Response всегда возвращает объект Response{}
+      // В нем указана общая информация по ответу сервера (status, url, headers и т.д.)
+      const response = await fetch('https://dummyjson.com/recipe?limit=5'); // "?limit=5" Указывает лимит
+      
+      // Метод json() объекта Response декодирует тело ответа в нужном нам формате JSON
       const data = await response.json();
+      
+      // Вставляем наш массив в состояние
       setRecipes(data.recipes);
+      
+    // Catch нужен для продолжения работы приложения в случае ошибки, иначе приложение ляжет
     } catch (error) {
-      console.log(error); 
-    }
+      alert('Ошибка ' + error);      
+    }  
   }
 
   useEffect(() => {
-    getProducts();
+    console.clear();    
+    getFood();
   }, []);
 
   return (
