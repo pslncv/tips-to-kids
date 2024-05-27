@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
-// import { productsList } from '../src/data/products';
+import { ErrorInfo, useEffect, useState } from 'react';
 import Product from './components/product';
 import ProductsList from './components/productsList';
 import { IProduct } from './models';
 
 const App = () => {
 
-  const [recipes, setRecipes] = useState<IProduct[]>([]);
 
+
+  const [recipes, setRecipes] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   async function getFood() {
     try {
+      setLoading(true)
 
       // Response (англ. "ответ") - буквально ответ сервера
       // Response всегда возвращает объект Response{}
@@ -22,21 +25,25 @@ const App = () => {
       
       // Вставляем наш массив в состояние
       setRecipes(data.recipes);
+      setLoading(false)
       
     // Catch нужен для продолжения работы приложения в случае ошибки, иначе приложение ляжет
-    } catch (error) {
-      alert('Ошибка ' + error);      
+  } catch (error: any) {
+      setLoading(false);
+      setError(error);
     }  
   }
 
   useEffect(() => {
-    console.clear();    
+    console.clear();
     getFood();
   }, []);
 
   return (
     <div className='wrapper'>
       <ProductsList>
+        {error && 'Error'}
+        {loading && 'Loading'}
         {recipes.map(recipe => {
           return <Product product={recipe} key={recipe.id} />;
         })}

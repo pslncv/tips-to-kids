@@ -17,3 +17,9 @@ export interface IProduct {
     reviewCount: number;
     mealType: string[];
 }
+
+export interface IError {
+    error: {
+        message: string;
+    }
+}
