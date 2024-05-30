@@ -1,8 +1,19 @@
+import { useState } from "react";
+
 const CreateForm = (props: any) => {
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [isProgramer, setIsProgramer] = useState(false)
 
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault()
+        setName('');
+        setEmail('');
+        setIsProgramer(false);
     }
+
+
 
     return (
         <form className="modal__form form" onSubmit={handleSubmit}>
@@ -20,7 +31,9 @@ const CreateForm = (props: any) => {
                     id="input__name"
                     className="input"
                     type="text"
-                />
+                    value={name}
+                    onChange={event => setName(event.target.value)}
+                    />
             </div>
             <div className="form__label">
                 <label
@@ -31,7 +44,9 @@ const CreateForm = (props: any) => {
                     id="input__email"
                     className="input"
                     type="text"
-                />
+                    value={email}
+                    onChange={event => setEmail(event.target.value)}
+                    />
             </div>
             <div className="form__label">
                 <label
@@ -42,9 +57,13 @@ const CreateForm = (props: any) => {
                     id="input__checkbox"
                     className="input"
                     type="checkbox"
+                    checked={isProgramer}
+                    onChange={event => setIsProgramer(event.target.checked)}
                 />
             </div>
-            <button className="form__submit" type="submit">Send!</button>
+            <button
+                className="form__submit"
+                type="submit">Send!</button>
         </form>
     );
 }
