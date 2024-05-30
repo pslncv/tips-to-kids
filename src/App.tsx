@@ -1,30 +1,18 @@
-import { useEffect, useState } from 'react';
-// import { productsList } from '../src/data/products';
+import ErrorMessage from './components/ErrorMessage';
+import Loader from './components/Loader';
 import Product from './components/product';
 import ProductsList from './components/productsList';
-import { IProduct } from './models';
+import { useRecipes } from './hooks/recipes';
 
 const App = () => {
 
-  const [recipes, setRecipes] = useState<IProduct[]>([]);
-
-  const getProducts = async () => {
-    try {
-      const response = await fetch('https://dummyjson.com/recipe');
-      const data = await response.json();
-      setRecipes(data.recipes);
-    } catch (error) {
-      console.log(error); 
-    }
-  }
-
-  useEffect(() => {
-    getProducts();
-  }, []);
+  const {recipes, loading, error} = useRecipes()
 
   return (
     <div className='wrapper'>
       <ProductsList>
+        {loading && <Loader />}
+        {error && <ErrorMessage />}
         {recipes.map(recipe => {
           return <Product product={recipe} key={recipe.id} />;
         })}
