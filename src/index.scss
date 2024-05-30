@@ -21,6 +21,7 @@ code {
 }
 
 .wrapper {
+    position: relative;
     padding: 15px 30px;
 }
 
@@ -120,4 +121,50 @@ code {
 .counter {
   font-weight: 600;
   padding: 0 10px;
+}
+
+.modal {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000d5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    width: 400px;
+    padding: 20px 20px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__label {
+        margin-bottom: 15px;
+        display: flex;
+        
+        &:not(:nth-child(4)) {
+            flex-direction: column;
+        }
+    }
+}
+
+.input {
+    &__title {
+    }
+    &__name {
+    }
+    &__email {
+    }
+    &__checkbox {
+    }
 }
