@@ -10,7 +10,7 @@ import { useRecipes } from './hooks/getRecipes';
 const App = () => {
 
   function handleModal() {
-    setModal(!modal)
+    setModal(prev => !prev)
   }
 
   const {recipes, loading, error} = useRecipes()
