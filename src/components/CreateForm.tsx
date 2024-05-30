@@ -13,8 +13,6 @@ const CreateForm = (props: any) => {
         setIsProgramer(false);
     }
 
-
-
     return (
         <form className="modal__form form" onSubmit={handleSubmit}>
             <button
