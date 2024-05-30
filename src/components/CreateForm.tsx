@@ -1,20 +1,50 @@
-const CreateForm = () => {
+const CreateForm = (props: any) => {
+
+    function handleSubmit(event: React.FormEvent) {
+        event.preventDefault()
+    }
+
     return (
-        <form className="modal__form form" action="">
-            <div className="form__title">Modal</div>
-            <label className="form__label input" htmlFor="input__name">
-                <span className="input__title">Name</span>
-                <input type="text" className="input__name" />
-            </label>
-            <label className="form__label input" htmlFor="input__email">
-                <span className="input__title">Email</span>
-                <input type="text" className="input__email" />
-            </label>
-            <label className="form__label input" htmlFor="input__checkbox">
-                <span className="input__title">Programmer?</span>
-                <input type="checkbox" className="input__checkbox" />
-            </label>
-            <button type="submit">Send!</button>
+        <form className="modal__form form" onSubmit={handleSubmit}>
+            <button
+                className="modal__quit"
+                type="button"
+                onClick={props.switch}>X
+            </button>
+            <div className="form__label">
+                <label
+                    className="input__title"
+                    htmlFor="input__name">Name
+                </label>
+                <input
+                    id="input__name"
+                    className="input"
+                    type="text"
+                />
+            </div>
+            <div className="form__label">
+                <label
+                    className="input__title"
+                    htmlFor="input__email">E-mail
+                </label>
+                <input
+                    id="input__email"
+                    className="input"
+                    type="text"
+                />
+            </div>
+            <div className="form__label">
+                <label
+                    className="input__title"
+                    htmlFor="input__checkbox">Programmer?
+                </label>
+                <input
+                    id="input__checkbox"
+                    className="input"
+                    type="checkbox"
+                />
+            </div>
+            <button className="form__submit" type="submit">Send!</button>
         </form>
     );
 }

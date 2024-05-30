@@ -124,42 +124,55 @@ code {
 }
 
 .modal {
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #000000d5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.form {
     width: 400px;
     padding: 20px 20px;
-    background-color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    background-color: white;
+    position: relative;
 
     &__title {
         text-align: center;
     }
 
+    &__quit {
+        padding: 2px 5px;
+        background-color: transparent;
+        border: 1px solid black;
+        border-radius: 25px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+    }
+
+
+.form {
+
     &__label {
         margin-bottom: 15px;
-        display: flex;
+        display: flex;   
+        flex-direction: column;
         
-        &:not(:nth-child(4)) {
-            flex-direction: column;
+        &:nth-child(4) {
+            flex-direction: row;
+            align-items: center;
         }
+    }
+
+    &__submit {
+        width: 100%;
     }
 }
 
 .input {
+    
+    padding: 5px;
+
     &__title {
+        margin: 0 5px 5px 0;
     }
     &__name {
     }
@@ -167,4 +180,26 @@ code {
     }
     &__checkbox {
     }
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000d5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  padding: 10px;
+  background-color: white;
+  border-radius: 15px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

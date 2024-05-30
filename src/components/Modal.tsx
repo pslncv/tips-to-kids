@@ -1,12 +1,16 @@
 interface ModalProps {
-    children: React.ReactNode
+    children: React.ReactNode;
+    title: string;
 }
 
-const Modal = ({children}: ModalProps) => {
+const Modal = ({children, title}: ModalProps) => {
 
     return (
-        <div className="modal">
-            {children}
+        <div className="overlay">
+            <div className="modal">
+                <div className="modal__title">{title}</div>
+                {children}
+            </div>
         </div>
     );
 }
