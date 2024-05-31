@@ -1,11 +1,19 @@
-import { useState } from 'react';
-import CreateForm from './components/CreateForm';
-import ErrorMessage from './components/ErrorMessage';
-import Loader from './components/Loader';
-import Modal from './components/Modal';
-import Product from './components/product';
-import ProductsList from './components/productsList';
+import { useEffect, useState } from 'react';
 import { useRecipes } from './hooks/getRecipes';
+
+import ProductsList from './components/ProductsList';
+import Product from './components/product';
+
+import CommentsList from './components/CommentsList';
+import Comment from './components/Comment';
+
+import Loader from './components/Loader';
+import ErrorMessage from './components/ErrorMessage';
+
+import CreateForm from './components/CreateForm';
+import Modal from './components/Modal';
+import { IComment } from './models';
+import { useComments } from './hooks/getComments';
 
 const App = () => {
 
@@ -14,6 +22,8 @@ const App = () => {
   }
 
   const {recipes, loading, error} = useRecipes()
+  const {comments} = useComments()
+
   const [modal, setModal] = useState(false)
 
   return (
@@ -30,6 +40,11 @@ const App = () => {
           return <Product product={recipe} key={recipe.id} />;
         })}
       </ProductsList>
+      <CommentsList>
+        {comments.map(comment => {
+          return <Comment comment={comment} key={comment.id}/>
+        })}
+      </CommentsList>
       { modal &&
       <Modal title='Contact us!'>
         <CreateForm switch={handleModal}/>

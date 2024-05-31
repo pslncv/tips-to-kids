@@ -9,21 +9,20 @@ export function useRecipes() {
     const [error, setError] = useState('')
   
     const getProducts = async () => {
-      try {
-        setError('')
-        setLoading(true)
-        const response = await fetch('https://dummyjson.com/recipe?limit=5');
-        const data = await response.json();
-        setRecipes(data.recipes);
-        setLoading(false)
-      } catch (error: any) {
-        setLoading(false);
-        setError(error);
-      }
+        try {
+            setError('')
+            setLoading(true)
+            const response = await fetch('https://dummyjson.com/recipe?limit=2');
+            const data = await response.json();        
+            setRecipes(data.recipes);
+            setLoading(false)
+        } catch (error: any) {
+            setLoading(false);
+            setError(error);
+        }
     }
   
     useEffect(() => {
-      console.clear()
       getProducts();
     }, []);
 

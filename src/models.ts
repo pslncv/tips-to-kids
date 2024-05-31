@@ -18,8 +18,14 @@ export interface IProduct {
     mealType: string[];
 }
 
-export interface IError {
-    error: {
-        message: string;
+export interface IComment {
+    body?: string;
+    id?: number;
+    likes?: number;
+    postId?: number;
+    user: {
+        id?: number
+        fullName?: string;
+        username?: string;
     }
 }
