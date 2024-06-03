@@ -5,20 +5,20 @@ import { IProduct } from '../models';
 export function useRecipes() {
 
     const [recipes, setRecipes] = useState<IProduct[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('')
+    const [recipesLoad, setRecipesIsLoad] = useState(false);
+    const [recipesError, setRecipesError] = useState('')
   
     const getProducts = async () => {
         try {
-            setError('')
-            setLoading(true)
+            setRecipesError('')
+            setRecipesIsLoad(true)
             const response = await fetch('https://dummyjson.com/recipe?limit=2');
             const data = await response.json();        
             setRecipes(data.recipes);
-            setLoading(false)
+            setRecipesIsLoad(false)
         } catch (error: any) {
-            setLoading(false);
-            setError(error);
+            setRecipesIsLoad(false);
+            setRecipesError(error);
         }
     }
   
@@ -26,6 +26,6 @@ export function useRecipes() {
       getProducts();
     }, []);
 
-    return {recipes, loading, error}
+    return {recipes, recipesLoad, recipesError}
 
 }

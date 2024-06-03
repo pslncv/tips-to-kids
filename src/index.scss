@@ -23,6 +23,9 @@ code {
 .wrapper {
     position: relative;
     padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
 }
 
 .product {
@@ -185,6 +188,14 @@ code {
 
     &__title {
         margin: 0 5px 5px 0;
+    }
+}
+
+#input {
+
+    &__text {
+        min-height: 70px;
+        resize: vertical;
     }
 }
 

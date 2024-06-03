@@ -3,14 +3,12 @@ import { useState } from "react";
 const CreateForm = (props: any) => {
 
     const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [isProgramer, setIsProgramer] = useState(false)
-
+    const [text, setText] = useState('')
+    
     function handleSubmit(event: React.FormEvent) {
         event.preventDefault()
         setName('');
-        setEmail('');
-        setIsProgramer(false);
+        setText('');
     }
 
     return (
@@ -23,7 +21,7 @@ const CreateForm = (props: any) => {
             <div className="form__label">
                 <label
                     className="input__title"
-                    htmlFor="input__name">Name
+                    htmlFor="input__name">Full Name
                 </label>
                 <input
                     id="input__name"
@@ -36,28 +34,14 @@ const CreateForm = (props: any) => {
             <div className="form__label">
                 <label
                     className="input__title"
-                    htmlFor="input__email">E-mail
+                    htmlFor="input__email">Text
                 </label>
-                <input
-                    id="input__email"
+                <textarea
+                    id="input__text"
                     className="input"
-                    type="text"
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
+                    value={text}
+                    onChange={event => setText(event.target.value)}
                     />
-            </div>
-            <div className="form__label">
-                <label
-                    className="input__title"
-                    htmlFor="input__checkbox">Programmer?
-                </label>
-                <input
-                    id="input__checkbox"
-                    className="input"
-                    type="checkbox"
-                    checked={isProgramer}
-                    onChange={event => setIsProgramer(event.target.checked)}
-                />
             </div>
             <button
                 className="form__submit"
