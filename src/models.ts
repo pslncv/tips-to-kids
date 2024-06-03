@@ -23,7 +23,8 @@ export interface IComment {
     id?: number;
     likes?: number;
     postId?: number;
-    user: {
+    userId?: number;
+    user?: {
         id?: number
         fullName?: string;
         username?: string;

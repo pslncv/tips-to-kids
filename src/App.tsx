@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecipes } from './hooks/getRecipes';
 
 import ProductsList from './components/ProductsList';
@@ -10,11 +10,15 @@ import Comment from './components/Comment';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
 
-import CreateForm from './components/CreateForm';
+import CreateComment from './components/CreateComment';
 import Modal from './components/Modal';
 import { useComments } from './hooks/getComments';
 
 const App = () => {
+
+    useEffect(() => {
+      console.clear()
+    }, [])
 
     function handleModal() {
         setModal(prev => !prev)
@@ -22,16 +26,6 @@ const App = () => {
 
     const {recipes, recipesLoad, recipesError} = useRecipes()
     const {comments, commentsLoad, commentsError} = useComments()
-
-// fetch('https://dummyjson.com/comments/add', {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({
-//         body: 'This makes all sense to me!',
-//         postId: 3,
-//         userId: 5,
-//     })
-// })
 
     const [modal, setModal] = useState(false)
 
@@ -44,21 +38,21 @@ const App = () => {
                 onClick={handleModal}
                 >📧</button>
             {recipesLoad && <Loader />}
-            {recipesError && <ErrorMessage />}
+            {recipesError && <ErrorMessage reason="Ошибка загрузки рецептов"/>}
             {recipes.map(recipe => {
                 return <Product product={recipe} key={recipe.id} />;
             })}
             </ProductsList>
             <CommentsList>
             {commentsLoad && <Loader/>}
-            {commentsError && <ErrorMessage />}
+            {commentsError && <ErrorMessage reason="Ошибка загрузки коментариев"/>}
             {comments.map(comment => {
                 return <Comment comment={comment} key={comment.id}/>
             })}
             </CommentsList>
             { modal &&
                 <Modal title='Comment!'>
-                    <CreateForm switch={handleModal}/>
+                    <CreateComment switch={handleModal}/>
                 </Modal>
             }
         </div>

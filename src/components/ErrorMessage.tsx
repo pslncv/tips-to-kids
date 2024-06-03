@@ -1,6 +1,10 @@
-const ErrorMessage = () => {
+interface ErrorProps {
+    reason: string
+}
+
+const ErrorMessage = ({reason}: ErrorProps) => {
     return (
-        <p>Error!</p>
+        <p className="error" style={{textAlign: 'center'}}>{reason}</p>
     );
 }
  

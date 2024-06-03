@@ -1,14 +1,46 @@
 import { useState } from "react";
+import { IComment } from "../models";
+import ErrorMessage from "./ErrorMessage";
 
-const CreateForm = (props: any) => {
+function CreateComment (props: any) {
+
+    const newComment: IComment = {
+        body: '',
+        postId: 3,
+        userId: 5,
+    }
 
     const [name, setName] = useState('')
     const [text, setText] = useState('')
+    const [validText, setValidText] = useState(true)
+
+    async function addComment() {
+        try {
+            const response = await fetch('https://dummyjson.com/comments/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newComment)
+            })
+            console.log(response.json());
+        }
+        catch(error: any) {
+            console.log(error);
+        }     
+    }
     
     function handleSubmit(event: React.FormEvent) {
-        event.preventDefault()
-        setName('');
-        setText('');
+        setValidText(true);
+        event.preventDefault();        
+        newComment.body = text;
+        
+        if(newComment.body.trim().length === 0) {
+            setValidText(false);
+        }
+
+        if (validText) addComment()
+        
+        setName('')
+        setText('')
     }
 
     return (
@@ -45,9 +77,11 @@ const CreateForm = (props: any) => {
             </div>
             <button
                 className="form__submit"
-                type="submit">Send!</button>
+                type="submit">Send!
+            </button>
+            {!validText && <ErrorMessage reason="Заполните коментарий!"/>}
         </form>
     );
 }
  
-export default CreateForm;
+export default CreateComment;

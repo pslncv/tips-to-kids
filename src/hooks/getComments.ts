@@ -12,7 +12,7 @@ export function useComments() {
         try {
             setCommentsError('')
             setCommentsLoad(true)
-            const response = await fetch('https://dummyjson.com/comments?limit=3');
+            const response = await fetch('https://dummyjson.com/comments?limit=6');
             const data = await response.json();
             const commentsList = data.comments
             setComments(commentsList)          
