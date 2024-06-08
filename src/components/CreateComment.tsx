@@ -2,9 +2,18 @@ import { useState } from "react";
 import { IComment } from "../models";
 import ErrorMessage from "./ErrorMessage";
 
-function CreateComment (props: any) {
+interface CreateCommentProps {
+    closeModal: () => void
+    onCreate: (comment: IComment) => void
+}
 
-    const newComment: IComment = {
+function CreateComment ({closeModal, onCreate} : CreateCommentProps) {
+
+
+    const TamplateNewComment: IComment = {
+        user: {
+            fullName: '',
+        },
         body: '',
         postId: 3,
         userId: 5,
@@ -12,16 +21,17 @@ function CreateComment (props: any) {
 
     const [name, setName] = useState('')
     const [text, setText] = useState('')
+    const [validName, setValidName] = useState(true)
     const [validText, setValidText] = useState(true)
 
     async function addComment() {
         try {
-            const response = await fetch('https://dummyjson.com/comments/add', {
+            await fetch('https://dummyjson.com/comments/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newComment)
-            })
-            console.log(response.json());
+                body: JSON.stringify(TamplateNewComment)
+            });
+            
         }
         catch(error: any) {
             console.log(error);
@@ -30,14 +40,24 @@ function CreateComment (props: any) {
     
     function handleSubmit(event: React.FormEvent) {
         setValidText(true);
-        event.preventDefault();        
-        newComment.body = text;
+        setValidName(true);
+        event.preventDefault();
+        TamplateNewComment.body = text;
+        TamplateNewComment.user.fullName = name;
         
-        if(newComment.body.trim().length === 0) {
+        if(TamplateNewComment.body.trim().length === 0) {
             setValidText(false);
         }
 
-        if (validText) addComment()
+        if(name.length === 0) {
+            setValidName(false);
+        }
+
+        if (validText && validName) {
+            addComment()
+            console.log(name, text, validName, validText);
+            onCreate(TamplateNewComment)
+        }
         
         setName('')
         setText('')
@@ -48,7 +68,7 @@ function CreateComment (props: any) {
             <button
                 className="modal__quit"
                 type="button"
-                onClick={props.switch}>X
+                onClick={closeModal}>X
             </button>
             <div className="form__label">
                 <label
@@ -79,6 +99,7 @@ function CreateComment (props: any) {
                 className="form__submit"
                 type="submit">Send!
             </button>
+            {!validName && <ErrorMessage reason="Заполните Имя!"/>}
             {!validText && <ErrorMessage reason="Заполните коментарий!"/>}
         </form>
     );

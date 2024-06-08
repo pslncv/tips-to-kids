@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRecipes } from './hooks/getRecipes';
 
 import ProductsList from './components/ProductsList';
@@ -13,6 +13,8 @@ import ErrorMessage from './components/ErrorMessage';
 import CreateComment from './components/CreateComment';
 import Modal from './components/Modal';
 import { useComments } from './hooks/getComments';
+import { IComment } from './models';
+import { ModalContext } from './context/ModalContext';
 
 const App = () => {
 
@@ -20,14 +22,15 @@ const App = () => {
       console.clear()
     }, [])
 
-    function handleModal() {
-        setModal(prev => !prev)
-    }
-
     const {recipes, recipesLoad, recipesError} = useRecipes()
-    const {comments, commentsLoad, commentsError} = useComments()
+    const {comments, commentsLoad, commentsError, addComment} = useComments()
 
-    const [modal, setModal] = useState(false)
+    const {modal, openModal, closeModal} = useContext(ModalContext)
+
+    const createHandler = (comment: IComment) => {
+        closeModal()
+        addComment(comment)
+    }
 
     return (
         <div className='wrapper'>
@@ -35,7 +38,7 @@ const App = () => {
             <button
                 className='popup'
                 type="button"
-                onClick={handleModal}
+                onClick={openModal}
                 >📧</button>
             {recipesLoad && <Loader />}
             {recipesError && <ErrorMessage reason="Ошибка загрузки рецептов"/>}
@@ -51,8 +54,8 @@ const App = () => {
             })}
             </CommentsList>
             { modal &&
-                <Modal title='Comment!'>
-                    <CreateComment switch={handleModal}/>
+                <Modal closeModal={closeModal} title='Comment!'>
+                    <CreateComment closeModal={closeModal} onCreate={createHandler}/>
                 </Modal>
             }
         </div>

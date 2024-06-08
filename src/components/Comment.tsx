@@ -7,9 +7,9 @@ interface CommentProps {
 const Comment = ({comment}: CommentProps) => {
     return (
         <>
-            <p>{comment.user?.fullName} say:</p>
-            <p>--{comment.body}</p>
-            <p>{comment.likes} likes!</p>
+            <p>{comment.user.fullName} say:</p>
+            <p>-- {comment.body}</p>
+            {comment.likes && <p>{comment.likes} likes!</p>}
             <br />
             <br />
         </>

@@ -8,6 +8,10 @@ export function useComments() {
     const [commentsLoad, setCommentsLoad] = useState(false)
     const [commentsError, setCommentsError] = useState('')
 
+    const addComment = (comment: IComment) => {
+        setComments(prev => [comment, ...prev])
+    }
+
     const getComments = async () => {    
         try {
             setCommentsError('')
@@ -27,5 +31,5 @@ export function useComments() {
         getComments();
     }, []);
 
-    return {comments, commentsLoad, commentsError}
+    return {comments, commentsLoad, commentsError, addComment}
 }
